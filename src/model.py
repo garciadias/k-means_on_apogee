@@ -1,5 +1,6 @@
 """Run K-means in a sample of synthetic spectra."""
 from os import getcwd
+import pickle
 
 from sklearn.cluster import KMeans
 from sklearn.pipeline import Pipeline
@@ -67,3 +68,5 @@ if __name__ == '__main__':
                   'KMeans__n_jobs': [1],
                   'KMeans__algorithm': ['elkan'], }
     k_means = run_k_means_clustering(spectra.values, param_grid, n_iter=10)
+    with open('%s/models/kmeans_model.pkl', 'wb') as model_output:
+        pickle.dump(k_means, model_output)
